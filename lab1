@@ -1,0 +1,64 @@
+import math
+
+
+def unstable_taylor_exp(x):
+    s = 1.0
+    a = x
+    n = 1
+    while s + a != s:
+        s += a
+        n += 1
+        a *= x / n
+    return s
+
+
+def stable_taylor_exp(x):
+    if x < 0:
+        return 1 / stable_taylor_exp(-x)
+    elif x > 709:  # Предотвращаем переполнение для больших x
+        return float('inf')
+    else:
+        s = 1.0
+        a = x
+        n = 1
+        while s + a != s:
+            s += a
+            n += 1
+            a *= x / n
+        return s
+
+
+# Вычисление значений для разных x
+x_values = [-250, -200, -150, -100, -50, -10, 0, 10, 50, 100, 150, 200, 250]
+
+print("НЕУСТОЙЧИВЫЙ АЛГОРИТМ")
+print(f"{'x':<8} | {'s':<30} | {'math.exp':<30} | {'Δ':<30}")
+print("-" * 80)
+
+for x in x_values:
+    unstable_result = unstable_taylor_exp(x)
+    built_in_result = math.exp(x)
+
+    # Определение относительной погрешности
+    if built_in_result != 0:
+        relative_error = abs((unstable_result - built_in_result) / built_in_result)
+    else:
+        relative_error = float('inf')
+
+    print(f"{x:<8} | {unstable_result:<30e} | {built_in_result:<30e} | {relative_error:<30e}")
+
+print("\nУСТОЙЧИВЫЙ АЛГОРИТМ")
+print(f"{'x':<8} | {'s':<30} | {'math.exp':<30} | {'Δ':<30}")
+print("-" * 80)
+
+for x in x_values:
+    stable_result = stable_taylor_exp(x)
+    built_in_result = math.exp(x)
+
+    # Определение относительной погрешности
+    if built_in_result != 0:
+        relative_error = abs((stable_result - built_in_result) / built_in_result)
+    else:
+        relative_error = float('inf')
+
+    print(f"{x:<8} | {stable_result:<30e} | {built_in_result:<30e} | {relative_error:<30e}")
