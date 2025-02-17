@@ -1,0 +1,24 @@
+import math
+
+def calculate(n, flag):
+    if n == 2:
+        return 2 * math.sqrt(2)
+    else:
+        if flag:
+            p_prev = calculate(n - 1, True)
+            term = (p_prev / (2 ** (n - 1))) ** 2
+            return 2 ** (n - 1) * (2 * term) / (1 + math.sqrt(1 - term))
+        else:
+            p_prev = calculate(n - 1, False)
+            term = (p_prev / (2 ** (n - 1))) ** 2
+            return 2 ** (n - 1) * math.sqrt(2 * (1 - math.sqrt(1 - term)))
+
+print("Устойчивый\t\t\t\t\t\t\tНеустойчивый\t\t\t\t\tΔ")
+for n in range(3, 40):
+    pn1 = calculate(n, False)
+    pn2 = calculate(n, True)
+    delta1 = pn1 - math.pi if pn1 != 0 else float('nan')
+    delta2 = pn2 - math.pi if pn2 != 0 else float('nan')
+    delta1_str = f"{delta1:.16f}" if not math.isnan(delta1) else "------------"
+    delta2_str = f"{delta2:.16f}" if not math.isnan(delta2) else "------------"
+    print(f"p{n} = {pn1:.16f}\t\t\t\t{pn2:.16f}\t\t\t\t{delta1_str}")
