@@ -50,6 +50,5 @@ def multiply_matrix_scalar(matrix, scalar):
     # умножение каждого элемента на скалярное число
     result = [[cell * scalar for cell in row] for row in matrix]
     print(f"Умножение матрицы на {scalar}: ")
-
     print_matrix(result)
     return result
