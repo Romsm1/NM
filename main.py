@@ -33,9 +33,6 @@ b = np.array([21, 9, 10])
 
 
 
-print("Решение системы X: ", 
-
-
 def matrix(A2, b):
     res = []
     for row in A2:
