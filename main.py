@@ -30,12 +30,23 @@ A2 = np.array([[3, -2, 4],
      [2, -1, -1]])
 
 b = np.array([21, 9, 10])
-
-A_inv = np.linalg.inv(A2)
-
-X =
+
 
 
-print("Решение системы X: ", X)
+print("Решение системы X: ", 
 
 
+def matrix(A2, b):
+    res = []
+    for row in A2:
+        res.append(int(sum(row[i] * b[i] for i in range(len(b)))))
+    return res
+
+
+def inverse_matrix(A2, b):
+    a_inv = np.linalg.inv(np.array(A2))
+    output = matrix(a_inv, b)
+    print(output)
+    return output
+
+inverse_matrix(matrix1, matrix3)
