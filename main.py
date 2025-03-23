@@ -49,4 +49,4 @@ def inverse_matrix(A2, b):
     print(output)
     return output
 
-inverse_matrix(matrix1, matrix3)
+inverted_matrix("Решение системы Х: ", matrix1, matrix3)
