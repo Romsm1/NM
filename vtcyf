@@ -1,0 +1,55 @@
+import numpy as np
+
+# Функция для решения СЛАУ через обратную матрицу
+def solve_linear_system(A, b):
+    """
+    Решает систему линейных уравнений A * X = b.
+    
+    Parameters:
+        A (np.ndarray): Квадратная матрица коэффициентов.
+        b (np.ndarray): Вектор правой части системы.
+    
+    Returns:
+        np.ndarray: Вектор решения X.
+    """
+    # Вычисляем обратную матрицу A_inv
+    A_inv = np.linalg.inv(A)
+    
+    # Умножаем обратную матрицу на вектор b
+    X = np.dot(A_inv, b)
+    
+    return X
+
+# Функция для умножения транспонированной матрицы на вектор
+def multiply_transposed_matrix_by_vector(A, b):
+    """
+    Умножает транспонированную матрицу A.T на вектор b.
+    
+    Parameters:
+        A (np.ndarray): Матрица.
+        b (np.ndarray): Вектор.
+    
+    Returns:
+        np.ndarray: Результат умножения A.T * b.
+    """
+    # Транспонируем матрицу A
+    A_transposed = A.T
+    
+    # Умножаем транспонированную матрицу на вектор b
+    result = np.dot(A_transposed, b)
+    
+    return result
+
+# Пример использования
+if __name__ == "__main__":
+    # Определяем матрицу A и вектор b
+    A = np.array([[3, 1], [1, 2]])  # Матрица коэффициентов
+    b = np.array([9, 8])            # Вектор правой части
+    
+    # Решаем СЛАУ
+    solution = solve_linear_system(A, b)
+    print("Решение СЛАУ (X):", solution)
+    
+    # Умножаем транспонированную матрицу на вектор b
+    transposed_result = multiply_transposed_matrix_by_vector(A, b)
+    print("Результат умножения A.T на b:", transposed_result)
